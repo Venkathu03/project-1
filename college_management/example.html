@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form name="yourForm" method="post" enctype="multipart/form-data">
+        <input type="file" name="fileField" />
+        <input type="button" value="submit" onClick="checkFile(this.form)" />
+    </form>
+
+    <script>
+        function checkFile(yourForm){
+
+var fileVal = yourForm.elements['fileField'].value;
+
+//RegEx for valid file name and extensions.
+var pathExpression = "[?:[a-zA-Z0-9-_\.]+(?:.png|.jpeg|.gif)";
+
+
+if(fileVal != ""){
+    if(!fileVal.toString().match(pathExpression) && confirm("The file is not a valid image. Do you want to continue?")){
+        yourForm.submit();
+    } else {
+        return;
+    }
+} else {
+    if(confirm("Do you want to continue without adding image?")) {
+        yourForm.submit();
+    } else {
+        return;
+    }
+}
+}
+    </script>
+</body>
+</html>
